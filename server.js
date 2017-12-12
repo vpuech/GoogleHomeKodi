@@ -124,6 +124,13 @@ app.all('/opentvshow', function(request, response) {
     .catch(error => handleResponse(response, error)); // eslint-disable-line arrow-parens
 });
 
+app.all('/opentvshows', function(request, response) {
+    validateRequest(request, response).then(() => {
+        Helper.kodiOpenAllTvshows(request, response);
+        response.sendStatus(200);
+    })
+    .catch(error => handleResponse(response, error)); // eslint-disable-line arrow-parens
+});
 // Start a new library scan
 app.all('/scanlibrary', function(request, response) {
     validateRequest(request, response).then(() => {

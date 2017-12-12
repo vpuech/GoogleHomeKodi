@@ -182,6 +182,23 @@ const kodiOpenVideoWindow = (file, Kodi) => {
     Kodi.GUI.ActivateWindow(params); // eslint-disable-line new-cap
 };
 
+const kodiOpenTvShowsWindow = (file, Kodi) => {
+    let params = {
+        'window': 'TvShows',
+        'parameters': [file]
+    };
+    
+    Kodi.GUI.ActivateWindow(params); // eslint-disable-line new-cap
+};
+
+const kodiOpenAllTvShowsWindow = (file, Kodi) => {
+    let params = {
+        'window': 'video',
+        'parameters': ["TvShowTitles"]
+    };
+    
+    Kodi.GUI.ActivateWindow(params); // eslint-disable-line new-cap
+};
 const kodiFindSong = (songTitle, Kodi) => {
     return new Promise((resolve, reject) => {
         Kodi.AudioLibrary.GetSongs() // eslint-disable-line new-cap
@@ -797,6 +814,10 @@ exports.kodiOpenTvshow = (request, response) => {
     kodiFindTvShow(request, response, param).then((data) => {
         kodiOpenVideoWindow(data.file, request.kodi);
     });
+};
+
+exports.kodiOpenAllTvshows = (request, response) => {
+        kodiOpenAllTvShowsWindow(request.kodi);
 };
 
 // Start a full library scan
